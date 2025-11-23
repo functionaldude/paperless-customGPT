@@ -1,4 +1,4 @@
-import org.jooq.meta.jaxb.Logging.*
+import org.jooq.meta.jaxb.Logging.WARN
 
 plugins {
 	kotlin("jvm") version "2.2.21"
@@ -34,7 +34,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-security-oauth2-client")
 	implementation("org.springframework.boot:spring-boot-starter-security-oauth2-resource-server")
-	implementation("org.springframework.boot:spring-boot-starter-webmvc")
+  implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
+  implementation("org.springframework.boot:spring-boot-starter-webmvc")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.springframework.modulith:spring-modulith-starter-core")

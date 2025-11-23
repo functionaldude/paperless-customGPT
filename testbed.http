@@ -1,0 +1,3 @@
+GET {{host}}/api/documents
+Authorization: Bearer {{$auth.token("authentik-paperless")}}
+Accept: application/json
