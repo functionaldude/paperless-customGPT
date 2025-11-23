@@ -1,6 +1,6 @@
 package com.functionaldude.paperless_customGPT.documents.internal
 
-import com.functionaldude.paperless.jooq.tables.references.*
+import com.functionaldude.paperless.jooq.public.tables.references.*
 import com.functionaldude.paperless_customGPT.documents.api.DocumentDto
 import org.jooq.DSLContext
 import org.jooq.impl.DSL.arrayAgg
