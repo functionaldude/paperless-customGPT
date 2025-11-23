@@ -6,7 +6,12 @@ import java.time.OffsetDateTime
 data class DocumentDto(
   val id: Int,
   val title: String,
-  val createdAt: LocalDate,
+  val documentDate: LocalDate,
   val modifiedAt: OffsetDateTime?,
-  val correspondentId: Int?
+  val mimeType: String,
+  val content: String,
+  val ownerUsername: String?,
+  val note: String?,
+  val correspondentName: String?,
+  val tags: List<String>?,
 )
