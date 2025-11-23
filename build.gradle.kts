@@ -24,6 +24,8 @@ repositories {
 
 extra["springModulithVersion"] = "2.0.0-RC1"
 
+val langchain4jVersion = "1.8.0" // or latest
+
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-flyway")
@@ -36,9 +38,17 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.springframework.modulith:spring-modulith-starter-core")
+
   implementation("org.postgresql:postgresql:42.7.3")
   implementation("org.flywaydb:flyway-database-postgresql")
   jooqCodegen("org.postgresql:postgresql:42.7.3")
+
+  implementation("dev.langchain4j:langchain4j:${langchain4jVersion}")
+  implementation("dev.langchain4j:langchain4j-open-ai:${langchain4jVersion}")
+  implementation("dev.langchain4j:langchain4j-ollama:1.8.0")
+  implementation("dev.langchain4j:langchain4j-pgvector:${langchain4jVersion}-beta15")
+  implementation("dev.langchain4j:langchain4j-spring-boot-starter:${langchain4jVersion}-beta15")
+
   developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("org.springframework.modulith:spring-modulith-actuator")
 	runtimeOnly("org.springframework.modulith:spring-modulith-observability")
