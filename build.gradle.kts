@@ -134,7 +134,14 @@ jooq {
       database {
         // Postgres database introspection
         name = "org.jooq.meta.postgres.PostgresDatabase"
-        inputSchema = "public" // Only look at the public schema (paperless lives there)
+        schemata {
+          schema {
+            inputSchema = "public" // paperless lives here
+          }
+          schema {
+            inputSchema = "paperless_rag"
+          }
+        }
         includes = ".*" // What to include (regex).
 
         // Optional: exclude stuff you don't care about
