@@ -30,10 +30,10 @@ CREATE INDEX IF NOT EXISTS idx_document_source_modified
 CREATE TABLE IF NOT EXISTS paperless_rag.document_chunk
 (
     id                 BIGSERIAL PRIMARY KEY,
-    document_source_id BIGINT      NOT NULL REFERENCES paperless_rag.document_source (id) ON DELETE CASCADE,
+    document_source_id INTEGER NOT NULL REFERENCES paperless_rag.document_source (paperless_doc_id) ON DELETE CASCADE,
     chunk_index        INTEGER     NOT NULL,
     content            TEXT        NOT NULL,
-    embedding          VECTOR(1536),
+    embedding          VECTOR(768),
     metadata           JSONB,
 
     created_at         TIMESTAMPTZ NOT NULL DEFAULT now()

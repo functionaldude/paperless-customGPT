@@ -46,6 +46,8 @@ dependencies {
 
   implementation("dev.langchain4j:langchain4j:${langchain4jVersion}")
   implementation("dev.langchain4j:langchain4j-open-ai:${langchain4jVersion}")
+  implementation("dev.langchain4j:langchain4j-http-client:${langchain4jVersion}")
+  implementation("dev.langchain4j:langchain4j-http-client-jdk:${langchain4jVersion}")
   implementation("dev.langchain4j:langchain4j-ollama:1.8.0")
   implementation("dev.langchain4j:langchain4j-pgvector:${langchain4jVersion}-beta15")
   implementation("dev.langchain4j:langchain4j-spring-boot-starter:${langchain4jVersion}-beta15")
