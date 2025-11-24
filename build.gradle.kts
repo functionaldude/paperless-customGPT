@@ -144,11 +144,7 @@ jooq {
         }
         includes = ".*" // What to include (regex).
 
-        // Optional: exclude stuff you don't care about
-        excludes = """
-                    flyway_schema_history
-                  | paperless_rag_.*       # your own RAG schema, if you don't want it here
-                """.trimIndent()
+        excludes = "flyway_schema_history"
       }
 
       target {
