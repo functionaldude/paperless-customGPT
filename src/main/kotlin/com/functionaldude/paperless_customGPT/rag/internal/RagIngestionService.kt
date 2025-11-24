@@ -7,6 +7,7 @@ import com.functionaldude.paperless.jooq.public.tables.references.DOCUMENTS_DOCU
 import com.functionaldude.paperless_customGPT.documents.DocumentDto
 import com.functionaldude.paperless_customGPT.documents.PaperlessDocumentService
 import com.functionaldude.paperless_customGPT.rag.api.IngestStatus
+import com.functionaldude.paperless_customGPT.toDoubleArray
 import dev.langchain4j.data.document.Document
 import dev.langchain4j.data.document.DocumentSplitter
 import dev.langchain4j.data.document.Metadata
@@ -159,7 +160,7 @@ class RagIngestionService(
     embeddings.forEachIndexed { index, embedding ->
       val segmentText = segments[index].text()
 
-      val vector = embedding.vector().map { it.toDouble() }.toTypedArray()
+      val vector = embedding.vector().toDoubleArray() // Convert to DoubleArray otherwise jOOQ/Postgres complains
 
       dsl.insertInto(DOCUMENT_CHUNK)
         .set(DOCUMENT_CHUNK.DOCUMENT_SOURCE_ID, documentId)
