@@ -54,7 +54,7 @@ class RagQueryService(
         )
       }
 
-    return emptyList()
+    return records
   }
 
   private fun toPgVectorLiteral(values: DoubleArray): String {
