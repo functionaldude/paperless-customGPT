@@ -51,6 +51,7 @@ dependencies {
   implementation("dev.langchain4j:langchain4j-ollama:1.8.0")
   implementation("dev.langchain4j:langchain4j-pgvector:${langchain4jVersion}-beta15")
   implementation("dev.langchain4j:langchain4j-spring-boot-starter:${langchain4jVersion}-beta15")
+  implementation("org.springdoc:springdoc-openapi-starter-webmvc-api:3.0.1")
 
   developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("org.springframework.modulith:spring-modulith-actuator")

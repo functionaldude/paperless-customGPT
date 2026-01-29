@@ -34,3 +34,6 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: ${AUTHENTIK_ISSUER_URI}
+springdoc:
+  api-docs:
+    path: /api/openapi.json

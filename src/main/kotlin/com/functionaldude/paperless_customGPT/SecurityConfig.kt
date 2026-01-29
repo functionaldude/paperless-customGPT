@@ -20,6 +20,8 @@ class SecurityConfig {
           .requestMatchers("/actuator/health").permitAll()
           .requestMatchers("/error").permitAll()
           .requestMatchers("/").permitAll()
+          .requestMatchers("/api/openapi.json").permitAll()
+          .requestMatchers("/v3/api-docs/**").permitAll()
           // everything else requires the user to be logged in
           .anyRequest().authenticated()
       }
