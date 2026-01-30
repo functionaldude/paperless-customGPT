@@ -19,6 +19,15 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Detect git tag for image
+        id: git_tag
+        run: |
+          tag=$(git describe --tags --exact-match HEAD 2>/dev/null || true)
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -35,6 +44,9 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=latest
+            ${{ steps.git_tag.outputs.tag != '' && format('type=raw,value={0}', steps.git_tag.outputs.tag) || '' }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
