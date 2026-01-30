@@ -88,17 +88,26 @@ class RagIngestionService(
   }
 
   private fun createDocumentSource(candidate: IngestionCandidate) {
-    dsl.newRecord(DOCUMENT_SOURCE).apply {
-      paperlessDocId = candidate.paperlessDocId
-      status = IngestStatus.RUNNING.name
+    val now = OffsetDateTime.now()
 
+    val existingRecord = dsl
+      .selectFrom(DOCUMENT_SOURCE)
+      .where(DOCUMENT_SOURCE.PAPERLESS_DOC_ID.eq(candidate.paperlessDocId))
+      .fetchOne()
+
+    val record = existingRecord ?: dsl.newRecord(DOCUMENT_SOURCE).apply {
+      paperlessDocId = candidate.paperlessDocId
+    }
+
+    record.apply {
+      status = IngestStatus.RUNNING.name
       title = candidate.title
       correspondent = candidate.correspondentName
       docDate = candidate.createdAt
       paperlessModifiedAt = candidate.modifiedAt
-
       lastIngestedAt = null
-      updatedAt = OffsetDateTime.now()
+      errorMessage = null
+      updatedAt = now
 
       store()
     }
