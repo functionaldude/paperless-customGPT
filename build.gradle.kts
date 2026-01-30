@@ -3,7 +3,7 @@ import org.jooq.meta.jaxb.Logging.WARN
 plugins {
 	kotlin("jvm") version "2.2.21"
 	kotlin("plugin.spring") version "2.2.21"
-	id("org.springframework.boot") version "4.0.0"
+  id("org.springframework.boot") version "4.0.2"
 	id("io.spring.dependency-management") version "1.1.7"
   id("org.jooq.jooq-codegen-gradle") version "3.19.26"
 }
@@ -22,7 +22,7 @@ repositories {
 	mavenCentral()
 }
 
-extra["springModulithVersion"] = "2.0.0-RC1"
+extra["springModulithVersion"] = "2.0.2"
 
 val langchain4jVersion = "1.8.0" // or latest
 
