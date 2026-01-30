@@ -16,9 +16,8 @@ Set the following environment variables for both local runs and container deploy
   falls back to the dummy key `lm-studio` for LM Studio compatibility.
 - `OPENAI_FORCE_HTTP1` – set to `true` (default) to force HTTP/1.1 for providers such as LM Studio; set to `false` to
   allow HTTP/2.
-- `SPRING_CONFIG_IMPORT` – optional list of external `application.*` locations. The container entrypoint removes the old
-  Boot 2.x defaults (`optional:file:./` etc.) and normalizes semicolon-delimited values to Spring Boot 4’s comma syntax
-  so legacy Swarm/Docker settings continue to work.
+- `SPRING_CONFIG_IMPORT` – ignored by the container entrypoint so all config comes from the bundled `application.yaml`
+  plus environment variables. Override directly in the Swarm stack only if you also change the entrypoint.
 - Any additional secrets required by other LLM providers can be added to the environment; the application reads them
   through Spring configuration.
 
