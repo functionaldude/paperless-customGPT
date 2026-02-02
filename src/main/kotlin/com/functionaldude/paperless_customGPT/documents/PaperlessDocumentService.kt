@@ -1,6 +1,7 @@
 package com.functionaldude.paperless_customGPT.documents
 
 import com.functionaldude.paperless.jooq.public.tables.references.*
+import com.functionaldude.paperless_customGPT.PaperlessUrlProvider
 import io.swagger.v3.oas.annotations.media.Schema
 import org.jooq.Condition
 import org.jooq.DSLContext
@@ -39,11 +40,17 @@ data class DocumentDto(
   val correspondentName: String?,
   @field:Schema(description = "Tags linked to the document.", example = "[\"Insurance\",\"Policy\"]", nullable = true)
   val tags: List<String>?,
+  @field:Schema(
+    description = "Direct link to the document inside Paperless.",
+    example = "https://paperless.example.com/documents/42"
+  )
+  val sourceUrl: String,
 )
 
 @Service
 class PaperlessDocumentService(
-  private val dsl: DSLContext
+  private val dsl: DSLContext,
+  private val paperlessUrlProvider: PaperlessUrlProvider,
 ) {
   private fun findDocs(vararg conditions: Condition): List<DocumentDto> {
     return dsl
@@ -85,6 +92,7 @@ class PaperlessDocumentService(
           note = record.get(DOCUMENTS_NOTE.NOTE),
           correspondentName = record.get(DOCUMENTS_CORRESPONDENT.NAME),
           tags = record.get("tag_names", Array<String>::class.java)?.filterNotNull()?.toList() ?: emptyList(),
+          sourceUrl = paperlessUrlProvider.documentUrl(record.get(DOCUMENTS_DOCUMENT.ID)!!),
         )
       }
   }

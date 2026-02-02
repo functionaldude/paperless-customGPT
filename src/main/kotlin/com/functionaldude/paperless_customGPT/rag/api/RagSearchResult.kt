@@ -25,4 +25,9 @@ data class RagSearchResult(
   val snippet: String,
   @field:Schema(description = "Vector similarity score (higher is more relevant).", example = "0.82")
   val score: Double,
+  @field:Schema(
+    description = "Direct link to the source document inside Paperless.",
+    example = "https://paperless.example.com/documents/42"
+  )
+  val sourceUrl: String,
 )

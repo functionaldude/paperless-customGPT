@@ -2,11 +2,9 @@ package com.functionaldude.paperless_customGPT.rag.internal
 
 import com.functionaldude.paperless.jooq.paperless_rag.tables.references.DOCUMENT_CHUNK
 import com.functionaldude.paperless.jooq.paperless_rag.tables.references.DOCUMENT_SOURCE
-import com.functionaldude.paperless_customGPT.documents.PaperlessDocumentService
+import com.functionaldude.paperless_customGPT.PaperlessUrlProvider
 import com.functionaldude.paperless_customGPT.rag.api.IngestStatus
 import com.functionaldude.paperless_customGPT.rag.api.RagSearchResult
-import com.functionaldude.paperless_customGPT.toDoubleArray
-import com.functionaldude.paperless_customGPT.toPgVectorLiteral
 import dev.langchain4j.model.embedding.EmbeddingModel
 import org.jooq.DSLContext
 import org.jooq.impl.DSL
@@ -15,8 +13,8 @@ import org.springframework.stereotype.Service
 @Service
 class RagQueryService(
   private val dsl: DSLContext,
-  private val paperlessDocumentService: PaperlessDocumentService,
   private val embeddingModel: EmbeddingModel,
+  private val paperlessUrlProvider: PaperlessUrlProvider,
 ) {
   fun findDocumentsSimilarTo(query: String, topK: Int): List<RagSearchResult> {
     val queryEmbedding = embeddingModel.embed(query).content()
@@ -51,6 +49,7 @@ class RagQueryService(
           correspondentName = record.get(DOCUMENT_SOURCE.CORRESPONDENT),
           snippet = record.get(DOCUMENT_CHUNK.CONTENT)!!,
           score = record.get("score", Double::class.java)!!,
+          sourceUrl = paperlessUrlProvider.documentUrl(record.get(DOCUMENT_SOURCE.PAPERLESS_DOC_ID)!!),
         )
       }
 

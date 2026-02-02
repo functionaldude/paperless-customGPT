@@ -9,6 +9,7 @@ Set the following environment variables for both local runs and container deploy
 
 - `PAPERLESS_DB_URL`, `PAPERLESS_DB_USER`, `PAPERLESS_DB_PASSWORD` – connection details for the shared
   Paperless/Postgres instance.
+- `PAPERLESS_BASE_URL` – public URL of the Paperless UI, used to expose document source links in API responses.
 - `AUTHENTIK_CLIENT_ID`, `AUTHENTIK_CLIENT_SECRET`, `AUTHENTIK_ISSUER_URI` – Authentik OAuth/OIDC values used by Spring
   Security.
 - `OPENAI_BASE_URL`, `OPENAI_MODEL_NAME`, `OPENAI_API_KEY` – overrides for the LangChain4j/OpenAI embedding client. By
